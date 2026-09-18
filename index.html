@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中秋 4 天連假・萬元內親子旅遊提案 (大膽遠行版) | 阿雞工坊</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, 'Microsoft JhengHei'; background-color: #f4f6f9; color: #333; }
+        .hero-section { background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%); color: #2c3e50; padding: 4rem 0; border-radius: 0 0 30px 30px; margin-bottom: 3rem; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .proposal-card { background: white; border-radius: 15px; padding: 2rem; margin-bottom: 3rem; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .proposal-title { color: #d35400; border-bottom: 2px solid #f39c12; padding-bottom: 0.5rem; margin-bottom: 1.5rem; font-weight: bold; }
+        .info-box { background: #fff8e1; border-left: 5px solid #ffc107; padding: 1rem; border-radius: 4px; margin-bottom: 1.5rem; }
+        .map-container { height: 300px; border-radius: 10px; z-index: 1; }
+        .chart-container { height: 300px; width: 100%; position: relative; }
+        .icon-text i { width: 24px; text-align: center; color: #e67e22; margin-right: 8px; }
+        .daily-schedule { border-left: 2px dashed #ccc; padding-left: 1rem; margin-left: 0.5rem; }
+        .day-badge { background-color: #e67e22; color: white; border-radius: 5px; padding: 2px 8px; font-size: 0.85rem; margin-right: 8px; }
+        .section-title { font-size: 1.2rem; font-weight: bold; margin-bottom: 1rem; color: #2c3e50; }
+        .proposal-img { width: 100%; max-height: 400px; object-fit: cover; }
+    </style>
+</head>
+<body>
+
+<div class="hero-section">
+    <div class="container">
+        <h1 class="display-4 fw-bold"><i class="fa-solid fa-car-side"></i> 中秋連假 萬元內大膽遠行企劃</h1>
+        <p class="lead mt-3">兩大一小・台中出發・4 天 3 夜瘋狂大冒險</p>
+        <p>誰說一萬塊不能跑很遠？阿雞為老闆準備了三個超有創意的硬核路線！</p>
+    </div>
+</div>
+
+<div class="container">
+    <!-- 提案一 -->
+    <div class="proposal-card">
+        <h2 class="proposal-title">提案一：台東太平洋「車宿 / 野營」迎日出</h2>
+        <img src="taitung_car_camping.jpg" class="img-fluid rounded mb-4 proposal-img shadow-sm" alt="台東車宿">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="info-box">
+                    <strong><i class="fa-solid fa-lightbulb"></i> 阿雞講評：</strong> 夠大膽就衝台東！直接帶小孩體驗「睡車上」或便宜海景營地。把住宿費壓到極限，伴著太平洋海浪聲入睡，早上拉開車門就是無敵日出！
+                </div>
+                
+                <h4 class="section-title">食衣住行規劃</h4>
+                <p class="icon-text"><i class="fa-solid fa-utensils"></i><strong>食：</strong> 預算 4,000 元 (在地小吃、原住民風味餐、或是買食材回營地自炊)。</p>
+                <p class="icon-text"><i class="fa-solid fa-shirt"></i><strong>衣：</strong> 海邊風大，防風外套必備；帶上玩沙玩水的替換衣物與涼鞋。</p>
+                <p class="icon-text"><i class="fa-solid fa-house"></i><strong>住：</strong> 預算 2,500 元 (尋找有衛浴的平價海景營地，付營位費睡車上或搭帳篷，平均一晚 800)。</p>
+                <p class="icon-text"><i class="fa-solid fa-car"></i><strong>行：</strong> 預算 3,500 元 (台中走南迴直達台東，油錢與過路費)。</p>
+
+                <h4 class="section-title mt-4">四天行程規劃</h4>
+                <div class="daily-schedule">
+                    <p><span class="day-badge">Day 1</span> <strong>南迴公路之旅：</strong> 台中出發 -> 南迴改 -> 多良車站看海 -> 抵達台東扎營</p>
+                    <p><span class="day-badge">Day 2</span> <strong>海岸線放電：</strong> 營地看日出 -> 加路蘭海岸 -> 三仙台跨海步道 -> 成功漁港吃海鮮</p>
+                    <p><span class="day-badge">Day 3</span> <strong>縱谷滑草：</strong> 拔營轉戰縱谷 -> 鹿野高台滑草 -> 伯朗大道騎單車</p>
+                    <p><span class="day-badge">Day 4</span> <strong>收心返航：</strong> 台東市區買麻糬 -> 沿南迴一路順遊回台中</p>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <h4 class="section-title text-center">預算視覺化</h4>
+                <div class="chart-container"><canvas id="chart1"></canvas></div>
+                <h4 class="section-title text-center mt-3">活動範圍</h4>
+                <div id="map1" class="map-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 提案二 -->
+    <div class="proposal-card">
+        <h2 class="proposal-title">提案二：台 61 西濱海線「五星香客大樓」巡禮</h2>
+        <img src="taiwan_temple_sunset.jpg" class="img-fluid rounded mb-4 proposal-img shadow-sm" alt="西濱香客大樓">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="info-box">
+                    <strong><i class="fa-solid fa-lightbulb"></i> 阿雞講評：</strong> 避開塞爆的高速公路，沿著西濱快速道路 (台 61) 往南開！晚上住中南部超級豪華、媲美星級飯店的「香客大樓」，乾淨便宜又有保庇！
+                </div>
+                
+                <h4 class="section-title">食衣住行規劃</h4>
+                <p class="icon-text"><i class="fa-solid fa-utensils"></i><strong>食：</strong> 預算 4,500 元 (沿海漁港海鮮吃到爽：芳苑烤蚵、東石漁港、台南小吃)。</p>
+                <p class="icon-text"><i class="fa-solid fa-shirt"></i><strong>衣：</strong> 輕便夏秋裝，海線風沙較大，帽子需有防風繩，防曬不可少。</p>
+                <p class="icon-text"><i class="fa-solid fa-house"></i><strong>住：</strong> 預算 3,500 元 (如：南鯤鯓代天府槺榔山莊或鹿港天后宮香客大樓，CP值極高)。</p>
+                <p class="icon-text"><i class="fa-solid fa-car"></i><strong>行：</strong> 預算 2,000 元 (西濱沿線免過路費，純油資)。</p>
+
+                <h4 class="section-title mt-4">四天行程規劃</h4>
+                <div class="daily-schedule">
+                    <p><span class="day-badge">Day 1</span> <strong>海牛文化：</strong> 台中 -> 彰化芳苑搭牛車採蚵 -> 雲林口湖休息站 -> 嘉義入住</p>
+                    <p><span class="day-badge">Day 2</span> <strong>鹽田夕照：</strong> 東石漁人碼頭玩水玩沙 -> 台南井仔腳瓦盤鹽田看夕陽 -> 南鯤鯓入住</p>
+                    <p><span class="day-badge">Day 3</span> <strong>歷史生態：</strong> 七股鹽山 -> 四草綠色隧道搭船 -> 安平古堡吃豆花</p>
+                    <p><span class="day-badge">Day 4</span> <strong>嘉南平原：</strong> 故宮南院 (小孩放電區) -> 順著台 61 線吹海風回台中</p>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <h4 class="section-title text-center">預算視覺化</h4>
+                <div class="chart-container"><canvas id="chart2"></canvas></div>
+                <h4 class="section-title text-center mt-3">活動範圍</h4>
+                <div id="map2" class="map-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 提案三 -->
+    <div class="proposal-card">
+        <h2 class="proposal-title">提案三：國境之南 屏東滿州/旭海 避世探秘</h2>
+        <img src="kenting_coastal_prairie.jpg" class="img-fluid rounded mb-4 proposal-img shadow-sm" alt="滿州旭海草原">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="info-box">
+                    <strong><i class="fa-solid fa-lightbulb"></i> 阿雞講評：</strong> 墾丁大街太貴太擠？我們直奔屏東最荒野美麗的東半部「滿州鄉」與「旭海」！尋找平價的小鎮民宿，給小孩一個充滿星星與大草原的中秋節！
+                </div>
+                
+                <h4 class="section-title">食衣住行規劃</h4>
+                <p class="icon-text"><i class="fa-solid fa-utensils"></i><strong>食：</strong> 預算 3,500 元 (恆春鎮上平價美食：鴨肉冬粉、綠豆蒜、滿州地方小吃)。</p>
+                <p class="icon-text"><i class="fa-solid fa-shirt"></i><strong>衣：</strong> 南部依然溫暖炎熱，準備短袖、防曬衣與好走的步道鞋。</p>
+                <p class="icon-text"><i class="fa-solid fa-house"></i><strong>住：</strong> 預算 4,000 元 (滿州鄉或恆春鎮外圍的平價家庭民宿/青年旅館)。</p>
+                <p class="icon-text"><i class="fa-solid fa-car"></i><strong>行：</strong> 預算 2,500 元 (台中直奔屏東最南端，來回油資與過路費)。</p>
+
+                <h4 class="section-title mt-4">四天行程規劃</h4>
+                <div class="daily-schedule">
+                    <p><span class="day-badge">Day 1</span> <strong>直奔南國：</strong> 台中出發 -> 國道3號到底 -> 恆春鎮上吃午餐補給 -> 滿州鄉入住</p>
+                    <p><span class="day-badge">Day 2</span> <strong>奇岩大漠：</strong> 佳樂水看奇岩 -> 九棚大沙漠 (港仔大沙漠) 看海沙奇景 -> 晚上滿州看無光害星空</p>
+                    <p><span class="day-badge">Day 3</span> <strong>草原迎風：</strong> 旭海大草原看無敵海景 -> 龍磐公園 -> 最南端地標打卡</p>
+                    <p><span class="day-badge">Day 4</span> <strong>海生館遊：</strong> 屏東海洋生物博物館 (視預算決定是否購票，或在外圍看海) -> 漫長車程返家</p>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <h4 class="section-title text-center">預算視覺化</h4>
+                <div class="chart-container"><canvas id="chart3"></canvas></div>
+                <h4 class="section-title text-center mt-3">活動範圍</h4>
+                <div id="map3" class="map-container"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+    const chartOptions = { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } };
+
+    new Chart(document.getElementById('chart1'), {
+        type: 'doughnut',
+        data: { labels: ['交通', '飲食', '娛樂', '住宿'], datasets: [{ data: [3500, 4000, 0, 2500], backgroundColor: ['#36A2EB', '#FF6384', '#FFCE56', '#4BC0C0'] }] },
+        options: chartOptions
+    });
+    new Chart(document.getElementById('chart2'), {
+        type: 'doughnut',
+        data: { labels: ['交通', '飲食', '娛樂', '住宿'], datasets: [{ data: [2000, 4500, 0, 3500], backgroundColor: ['#36A2EB', '#FF6384', '#FFCE56', '#4BC0C0'] }] },
+        options: chartOptions
+    });
+    new Chart(document.getElementById('chart3'), {
+        type: 'doughnut',
+        data: { labels: ['交通', '飲食', '娛樂', '住宿'], datasets: [{ data: [2500, 3500, 0, 4000], backgroundColor: ['#36A2EB', '#FF6384', '#FFCE56', '#4BC0C0'] }] },
+        options: chartOptions
+    });
+
+    delete L.Icon.Default.prototype._getIconUrl;
+    L.Icon.Default.mergeOptions({
+      iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png',
+      iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png',
+      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
+    });
+
+    // 台東
+    const map1 = L.map('map1').setView([22.75, 121.15], 9);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map1);
+    L.marker([22.5080, 120.9593]).addTo(map1).bindPopup('多良車站');
+    L.marker([23.1235, 121.4087]).addTo(map1).bindPopup('三仙台');
+    L.marker([22.9135, 121.1192]).addTo(map1).bindPopup('鹿野高台');
+
+    // 西濱
+    const map2 = L.map('map2').setView([23.5, 120.2], 9);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map2);
+    L.marker([23.9263, 120.3168]).addTo(map2).bindPopup('芳苑燈塔');
+    L.marker([23.4503, 120.1354]).addTo(map2).bindPopup('東石漁人碼頭');
+    L.marker([23.2862, 120.1415]).addTo(map2).bindPopup('南鯤鯓代天府');
+
+    // 屏東滿州
+    const map3 = L.map('map3').setView([22.1, 120.8], 10);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map3);
+    L.marker([22.0039, 120.7443]).addTo(map3).bindPopup('恆春古城');
+    L.marker([21.9902, 120.8523]).addTo(map3).bindPopup('滿州鄉/佳樂水');
+    L.marker([22.1930, 120.8845]).addTo(map3).bindPopup('旭海草原');
+
+    setTimeout(() => { map1.invalidateSize(); map2.invalidateSize(); map3.invalidateSize(); }, 500);
+</script>
+
+</body>
+</html>
